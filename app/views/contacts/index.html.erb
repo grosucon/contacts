@@ -1,0 +1,15 @@
+<%= link_to 'Add contact', new_contact_path(project_id: @project.id), class: 'icon icon-add' %>
+
+<% @contacts.each do |contact| %>
+    <p>
+      <%= contact.name %>
+
+      <%= render :partial => 'attachments/links',
+      :locals  => { :attachments => contact.attachments,
+      :options => { :deletable => User.current.logged? }
+      } %>
+
+    <td><%= link_to 'Edit', edit_contact_path(contact, project_id: @project.id), class: 'icon icon-edit' %></td>
+    <td><%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'icon icon-del' %></td>
+    </p>
+<% end %>

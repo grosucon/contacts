@@ -1,0 +1,26 @@
+<%= form_for(@contact) do |f| %>
+
+    <%= hidden_field_tag 'contact[project_id]', params[:project_id] %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :about %><br>
+      <%= f.text_field :about %>
+    </div>
+
+    <div class="box">
+      <p>
+        <label><%= l(:label_attachment_plural) %></label>
+        <%= render :partial => 'attachments/form' %>
+      </p>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
+<% end %>
