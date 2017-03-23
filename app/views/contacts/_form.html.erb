@@ -1,6 +1,5 @@
-<%= form_for(@contact) do |f| %>
+<%= form_for([ @project, @contact]) do |f| %>
 
-    <%= hidden_field_tag 'contact[project_id]', params[:project_id] %>
 
     <div class="field">
       <%= f.label :name %><br>
@@ -11,6 +10,26 @@
       <%= f.label :about %><br>
       <%= f.text_field :about %>
     </div>
+
+
+
+    <% custom_field_values = @contact.custom_field_values %>
+    <% if custom_field_values.present? %>
+        <div class="splitcontent">
+          <div class="splitcontentleft">
+            <% i = 0 %>
+            <% split_on = (custom_field_values.size / 2.0).ceil - 1 %>
+            <% custom_field_values.each do |value| %>
+                <p><%= custom_field_tag_with_label :contact, value %></p>
+                <% if i == split_on -%>
+                    </div><div class="splitcontentright">
+                <% end -%>
+                <% i += 1 -%>
+            <% end -%>
+            </div>
+            </div>
+    <% end %>
+
 
     <div class="box">
       <p>

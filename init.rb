@@ -1,4 +1,5 @@
 require 'project_patch1'
+require 'custom_fields_helper_patch'
 
 Redmine::Plugin.register :contacts do
   name 'Contacts plugin'
@@ -7,14 +8,13 @@ Redmine::Plugin.register :contacts do
   version '0.0.1'
 
   project_module :contacts do
-    permission :view_contacts, :contacts => :index
-    permission :add_contacts, :contacts => :create
-    permission :edit_contacts, :contacts => :update
-    permission :delete_contacts, :contacts => :destroy
+    permission :view_contacts, :contacts => [:index, :show]
+    permission :add_contacts, :contacts => [:index, :show, :create, :new]
+    permission :update_contacts, :contacts => [:index, :show, :create, :new, :update, :edit]
+    permission :delete_contacts, :contacts => [:destroy, :index, :show]
   end
 
-
-  menu :project_menu, :contacts, { :controller => 'contacts', :action => 'index' }, :caption => 'Contacts', :before => 'Settings', :param => :project_id
+  menu :project_menu, :contacts, { :controller => 'contacts', :action => 'index' }, :caption => :plugin_name, :before => 'Settings', :param => :project_id
 
 end
 

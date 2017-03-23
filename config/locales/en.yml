@@ -1,3 +1,10 @@
 # English strings go here for Rails i18n
 en:
   # my_label: "My label"
+
+  contact: Contact # contact custom field
+  plugin_name: Contacts # init
+  add_contact: Add contact # index
+  edit: Edit # index
+  delete: Delete # index
+  are_you_sure: Are you sure? # index
