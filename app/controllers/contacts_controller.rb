@@ -20,7 +20,11 @@ class ContactsController < ApplicationController
     sort_init(@query.sort_criteria.empty? ? [['spent_on', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
 
+
     @contacts = Contact.where(project_id: @project.id)
+
+    @contact_count_by_group = @query.contact_count_by_group
+
   end
 
   def show

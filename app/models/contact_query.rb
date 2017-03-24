@@ -5,7 +5,7 @@ class ContactQuery < Query
   self.available_columns = [
       QueryColumn.new(:id, :sortable => "#{Contact.table_name}.id", :default_order => 'desc', :caption => 'Fields'),
       QueryColumn.new(:project, :sortable => "#{Project.table_name}.name", :groupable => true),
-      # QueryColumn.new(:about, :sortable => "#{Contact.table_name}.about"),
+      QueryColumn.new(:about, :sortable => "#{Contact.table_name}.about"),
       QueryColumn.new(:name, :sortable => "#{Contact.table_name}.name"),
   ]
 
@@ -26,6 +26,12 @@ class ContactQuery < Query
     @available_columns += ContactCustomField.visible.
         map {|cf| QueryCustomFieldColumn.new(cf) }
     @available_columns
+  end
+
+  def contact_count_by_group
+    grouped_query do |scope|
+      scope.count
+    end
   end
 
 end
